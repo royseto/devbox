@@ -1,4 +1,5 @@
 # Build a dev box for data science work at the command line.
+# This exposes an SSH service.
 
 FROM ubuntu:14.04
 
@@ -24,7 +25,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 # Install Ubuntu packages.
 
 RUN apt-get update && apt-get install -y -q \
-    openssh-client \
+    openssh-client openssh-server \
     zip unzip bzip2 wget curl git \
     python2.7 python-pip python-virtualenv build-essential python2.7-dev \
     python-software-properties \
@@ -38,4 +39,20 @@ ADD install_packages.R /tmp/build/
 WORKDIR /tmp/build
 RUN R CMD BATCH --no-save --no-restore install_packages.R
 
-WORKDIR /root
+# Enable passwordless sudo for users in the sudo group.
+
+RUN sed -ie '/sudo/ s/ALL$/NOPASSWD: ALL/' /etc/sudoers
+
+# Create a dev user. Mount its home directory /home/dev from a host volume.
+
+RUN mkdir -p /home/dev
+RUN /bin/chown dev:users /home/dev
+VOLUME ["/home/dev"]
+RUN useradd dev -u 1000 -c "developer account" -d /home/dev -s /bin/bash -g users -G sudo --no-create-home
+
+# Run an ssh server.
+
+WORKDIR /
+RUN mkdir /var/run/sshd
+ENTRYPOINT /usr/sbin/sshd -D
+EXPOSE 22
