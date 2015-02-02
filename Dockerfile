@@ -26,7 +26,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN apt-get update && apt-get install -y -q \
     openssh-client \
     zip unzip bzip2 wget curl git \
-    python2.7 python-pip python-virutualenv build-essential python2.7-dev \
+    python2.7 python-pip python-virtualenv build-essential python2.7-dev \
     python-software-properties \
     vim emacs-snapshot tmux zsh keychain \
     postgresql-client \
@@ -35,5 +35,7 @@ RUN apt-get update && apt-get install -y -q \
 # Install R packages.
 
 ADD install_packages.R /tmp/build/
-DIR /tmp/build
-RUN R CMD BATCH install_packages.R --no-restore --no-save
+WORKDIR /tmp/build
+RUN R CMD BATCH --no-save --no-restore install_packages.R
+
+WORKDIR /root
