@@ -48,7 +48,7 @@ RUN sed -ie '/sudo/ s/ALL$/NOPASSWD: ALL/' /etc/sudoers
 RUN mkdir -p /home/dev
 RUN /bin/chown dev:users /home/dev
 VOLUME ["/home/dev"]
-RUN useradd dev -u 1000 -c "developer account" -d /home/dev -s /bin/bash -g users -G sudo --no-create-home
+RUN useradd dev -u 1000 -c "developer account" -d /home/dev -s /bin/zsh -g users -G sudo --no-create-home
 
 # Run an ssh server.
 
