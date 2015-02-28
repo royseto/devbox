@@ -19,6 +19,7 @@ RUN dpkg-reconfigure locales
 RUN apt-get install -y -q software-properties-common
 RUN add-apt-repository ppa:ubuntu-elisp/ppa
 RUN add-apt-repository ppa:pi-rho/dev
+RUN add-apt-repository ppa:git-core/ppa
 RUN add-apt-repository 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/'
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 
