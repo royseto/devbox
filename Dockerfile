@@ -33,6 +33,10 @@ RUN apt-get update && apt-get install -y -q \
     postgresql-client \
     r-base r-base-dev
 
+# Install csvkit.
+
+RUN pip install csvkit
+
 # Install R packages.
 
 ADD install_packages.R /tmp/build/
