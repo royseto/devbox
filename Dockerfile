@@ -24,6 +24,8 @@ RUN add-apt-repository ppa:pi-rho/dev
 RUN add-apt-repository ppa:git-core/ppa
 RUN add-apt-repository 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/'
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+
+RUN apt-get update && apt-get install -y -q curl
 RUN curl -sL https://deb.nodesource.com/setup | bash -
 
 # Install Ubuntu packages.
@@ -41,7 +43,7 @@ RUN apt-get update && apt-get install -y -q \
 
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable --ruby
-RUN gem install gist
+RUN . /usr/local/rvm/scripts/rvm && gem install gist
 
 # Install npm packages.
 
