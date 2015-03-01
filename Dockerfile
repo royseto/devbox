@@ -67,6 +67,12 @@ RUN /tmp/build/install_phantomjs.sh
 # Install GNU Parallel.
 
 RUN (wget -O - pi.dk/3 || curl pi.dk/3/ || fetch -o - http://pi.dk/3) | bash
+RUN bash -c "(echo 'will cite' | parallel --bibtex)"
+
+# Install Redis.
+
+ADD install_redis.sh /tmp/build/
+RUN /tmp/build/install_redis.sh
 
 # Enable passwordless sudo for users in the sudo group.
 
