@@ -36,7 +36,7 @@ RUN apt-get update && apt-get install -y -q \
     python2.7 python-pip python-virtualenv build-essential python2.7-dev \
     python-software-properties \
     vim emacs-snapshot tmux zsh keychain \
-    postgresql-client \
+    postgresql-client libpq-dev python-dev \
     r-base r-base-dev nodejs imagemagick optipng
 
 # Install RVM, Ruby, and gist.
