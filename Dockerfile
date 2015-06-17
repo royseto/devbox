@@ -2,6 +2,14 @@
 
 FROM royseto/devbase
 
+# Set locale to US. Override in derivative image if needed.
+
+RUN apt-get update && apt-get install -y language-pack-en
+ENV LANGUAGE en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
+
 # Create a dev user. Mount its home directory /home/dev from a host volume.
 
 WORKDIR /
