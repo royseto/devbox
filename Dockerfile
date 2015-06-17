@@ -2,13 +2,9 @@
 
 FROM royseto/devbase
 
-# Set locale to US. Override in derivative image if needed.
+# Set default locale to US. Requires en_US.UTF-8 locale to be available in base image.
 
-RUN apt-get update && apt-get install -y language-pack-en
-ENV LANGUAGE en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LC_ALL en_US.UTF-8
-RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
+RUN echo 'LANG="en_US.UTF-8"' > /etc/default/locale
 
 # Create a dev user. Mount its home directory /home/dev from a host volume.
 
