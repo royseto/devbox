@@ -1,6 +1,6 @@
 # Expose an SSH service on top of royseto/devbase
 
-FROM royseto/devbase
+FROM royseto/devbase:next
 
 # Set default locale to US. Requires en_US.UTF-8 locale to be available in base image.
 
